@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background: gainsboro;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background: white;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" style="left: 550px;"></div>
+    <script type="text/javascript">
+
+
+        function genericAnimation(properties) {
+            const { start, finish, duration, animationValueAssigner, easing, fps = 60 } = properties;
+            let time = 0;
+            let position = start;
+            const distances = finish.map((finish, i) => finish - start[i]);
+            const handler = setInterval(progressAnimation, 1000 / fps);
+
+            function progressAnimation() {
+                time += 1 / fps;
+                position = position.map( (pos, i) => easing(time, start[i], distances[i], duration));
+
+                if (position[0] >= finish[0]) {
+                    clearInterval(handler);
+                    return animationValueAssigner(finish);
+                }
+                animationValueAssigner(position);
+            }
+        }
+
+
+        var box = document.getElementById("box"),
+            start = [150, 0],
+            finish = [200, 500],
+            duration = 5;
+        genericAnimation({
+            start, finish, duration,
+            animationValueAssigner: val => {
+                box.style.left = val[0] + "px";
+                box.style.top = val[1] + "px";
+            },
+            easing: (t, b, c, d) => {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t + b;
+                t--;
+                return -c / 2 * (t * (t - 2) - 1) + b;
+            }
+        });
+
+        // ## Easing ##
+        // visual examples:     http://easings.net/
+        // or:                  https://cubic-bezier.com/
+        // javascript:          http://gizma.com/easing/
+        // Can also use library to make the syntax simpler: https://stackoverflow.com/questions/29556772/convert-css-cubic-bezier-easing-to-javascript
+        // e.g. BezierEasing(0.25, 0.1, 0.0, 1.0)
+        
+        // t: current time,
+        // b: beginning value,
+        // c: change in value,
+        // d: duration
+    </script>
+
+    <div class="as-console-wrapper">
+        <div class="as-console"></div>
+    </div>
+</body>
+
+</html>

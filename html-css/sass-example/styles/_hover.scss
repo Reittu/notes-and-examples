@@ -1,0 +1,39 @@
+$myColor : rgb(255,0,0);
+
+body {
+    text-align: center;
+}
+
+.intro {
+    position: relative;
+    display: inline-block;
+    color: $myColor;
+    font-size: 3em;
+
+    &::before,
+    &::after {
+        content: '';
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+    }
+
+    &::before {
+        background: $myColor;
+        width: 100vw;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -2;
+    }
+
+    &::after {
+        background: white;
+        z-index: -1;
+        height: 101%;
+        left: -.1em;
+        right: -.1em;
+    }
+
+
+}

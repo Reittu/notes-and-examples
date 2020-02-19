@@ -1,0 +1,61 @@
+https://ec.haxx.se/http-post.html
+
+For windows always use quotation marks ("") and slash (/) to escape quotation marks if data contains them.
+With --data-binary (or just -d or --data) you can do a POST-request. --data-binary doesn't get rid of carriage returns and newlines. 
+
+\ splits command to multiple lines if needed (DOESN'T WORK FOR WINDOWS! USE GIT BASH/WSL IF RUNNING WINDOWS.)
+
+------- HEADERS (-H) ------------
+
+curl \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <JWT_TOKEN>" \
+  -H "x-jwt-assertion: <JWT_TOKEN>" \
+  -X POST \
+  -d  '{"key1" : "value1", "key2" : "value2"}' \
+  https://example.com/
+
+--------- USING FILES (@) -------
+
+-d @<filename>.json
+
+--------- POST ------------------
+
+curl \
+-X POST -H 'Content-type:application/json' \
+http://localhost:5000/users/add -d \
+'{"username": "beau"}'
+
+curl \
+-X POST -H 'Content-type:application/json' \
+http://localhost:5000/users/add -d \
+'{"username": "trevor"}'
+
+curl \
+-X POST -H 'Content-type:application/json' \
+http://localhost:5000/exercises/add -d \
+'{"username": "beau", "description": "run", "duration": 9, "date": "2019-11-21T02:20:06.4522"}'
+
+
+curl \
+-X POST -H 'Content-type:application/json' \
+http://localhost:5000/exercises/add -d \
+'{"username": "beau", "description": "bike ride", "duration": 30, "date": "2019-11-21T02:20:07.3222"}'
+
+curl \
+-X POST -H 'Content-type:application/json' \
+http://localhost:5000/exercises/add -d \
+'{"username": "trevor", "description": "bike ride", "duration": 30}'
+
+-------- PUT update ------------------
+
+curl \
+-X PUT -H 'Content-type:application/json' \
+http://localhost:5000/exercises/update/5dd6d21c770476338803d01d -d \
+'{"username":"beau","description":"walk","duration":120}'
+
+------- DELETE -----------------------
+curl \
+-X DELETE \
+http://localhost:5000/exercises/5dd6d21c770476338803d01d
+

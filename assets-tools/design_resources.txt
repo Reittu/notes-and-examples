@@ -1,0 +1,38 @@
+## Images
+
+https://unsplash.com/
+https://pixabay.com/
+https://www.pexels.com/
+
+## Design, Illustrations, SVG
+
+https://undraw.co/illustrations 		An open-source illustrations website, where you can change the colors of the illustrations online before downloading.
+https://www.manypixels.co/gallery/		ManyPixels offer free svg illustrations with the possibility to customize the color as well.
+https://woobro.design/ 				Woobro has some very detailed high-quality svgs for some specific use cases.
+https://illlustrations.co/ 			100 beautiful illustrations, designed by Vijay Verma during a 100 days of illustrations challenge.
+https://isometric.online/ 			This website offers a searchable list of nice and free isometric illustrations.
+https://www.glazestock.com/ 			Glaze offers a lot of royalty-free high quality illustrations.
+
+https://www.humaaans.com 			Humaaans have a variety of different svgs of people. They also offer each element of the humans separately to be able to create your own.
+https://fresh-folk.com/ 			Similar to Humaaans, Fresh Folk offers people for self composing with a different style.
+
+https://www.opendoodles.com/ 			Open Doodles provide a bunch of illustrations in a sketchy style.
+https://pimpmydrawing.com/			CAD-like (copy SVG from images)
+
+https://iradesign.io/				More humans & objects for compositions
+
+## Icons
+
+https://lukaszadam.com/illustrations 		Lukasz Adam is an independent web designer and offers a lot of free svg icon sets on his website.
+https://iconmonstr.com/				Nice icons (over 4k) with same style
+https://konpa.github.io/devicon/		Popular developer icons (javascript, chrome, github, react, ...)
+https://icons8.com/icons			Lots... Requires link attribution.
+
+## Avatars
+
+https://personas.draftbit.com/
+https://getavataaars.com/
+
+## Logo
+
+https://logomakr.com

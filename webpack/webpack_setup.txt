@@ -1,0 +1,261 @@
+https://www.youtube.com/watch?v=MpGLUVbqoYQ
+
+1. npm init -y
+
+2. add ignores to .gitignore (can use nodejs boilerplate); node_modules, dist, .env, ...
+
+3. package.json simple cleanup; add private: true, clean scripts, ...
+
+4. npm install -D webpack webpack-cli
+
+5. add script to package.json:
+	"start": "webpack"
+
+6. by default it tries to find index.js in './src' directory
+	-> create index.js in the src folder.
+
+7. when webpack is run, it creates a main.js in ./dist folder
+    include <script src="./dist/main.js"></script>
+    at the end of the index.html body
+
+
+---------------------------------------
+
+Configuration  (commit 4 and forward)
+
+---------------------------------------
+
+
+8. split the code and do all the exports and imports
+
+9. remove all the scrips from the end of the body except main.js
+
+10. should work normally
+
+11. actual configuration
+
+	make a configuration file (project root folder, same as package.json), name it e.g. webpack.config.js
+	const path = require("path"); // comes with node, no need to install anything
+	module.exports = {
+		entry: "./src/index.js",	<-- can be whatever
+		output: {
+			filename: "main.js",	<-- can be whatever
+			path: path.resolve(__dirname, "dist")
+		},
+ 	} 
+
+
+11.2 make webpack use the new configuration by replacing start script:
+	"start": "webpack --config webpack.config.js"
+
+12. npm start
+
+13. can change configuration to be ----  mode: "development"   --- to stop minifying
+
+14. to use loaders; https://webpack.js.org/loaders/ (e.g. style-loader and css-loader):
+	module.exports = {
+  		module: {
+    			rules: [
+     			 {
+        			test: /\.css$/i,
+       				use: ['style-loader', 'css-loader'],	// They load in reverse order, css-loader -> style-loader and the order is important!
+     			 },
+    			],
+  		},
+	};
+
+
+
+15. SASS
+
+npm install sass-loader node-sass webpack -D
+
+	module.exports = {
+  		module: {
+    			rules: [
+     			 {
+        			test: /\.scss$/i,
+       				use: ['style-loader', 'css-loader', 'sass-loader'],
+     			 },
+    			],
+  		},
+	};
+
+create a main.scss file:
+@import "~bootstrap/scss/bootstrap";
+
+on index.js
+import "./main.scss";
+
+---------------------------------------------
+
+can override some bootstrap for example.
+overrides before import:
+
+$primary: teal;
+$danger: purple;
+@import "~bootstrap/scss/bootstrap";
+
+need to rebuild without devserver between every change (npm start)
+
+---------------------------------------------
+
+16. cache busting (prevent caching when we don't want browsers to cache things)
+
+to rename main.js --> main.RANDOMHASH.js, change webpack.config.js:
+
+output... filename: "main.[contentHash].js" // main or vendor is usual
+
+remove <script src... main.js > from index.html
+
+HtmlWebpackPlugin is useful for this:
+
+npm install -D html-webpack-plugin
+webpack.config.js:
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = { entry, output, ..., plugins: [new HtmlWebpackPlugin()], ... };
+
+command line:
+open dist/index.html
+
+Can use all sorts of templates, this is a basic example.
+create src -> template.html
+copy original index.html to template.html and remove all scripts
+
+[new HtmlWebpackPlugin({template: "./src/template.html"})]  // change configuration to this
+
+... go to 20. for clean webpack plugin to clear old dist each time the build is called
+
+17. make webpack.dev.js  // config for dev
+    make webpack.prod.js // config for production
+    copy paste all from original to both, change mode to "production" or "development"
+
+    on production and dev: get rid of entry (common one has it)
+    rename webpack.config.js -> webpack.common.js
+    get rid of mode and output on common // easier in dev to just have main.js and not hash
+    remove hashing on dev back to just filename: "main.js"
+    remove plugins from dev and prod (keep in common)
+    remove module from dev and prod
+    remove var HtmlWebpackPlugin... from dev & prod
+
+    npm install -D webpack-merge
+    on dev and prod: 
+	const common = require("./webpack.common");
+    	const merge = require("webpack-merge");
+	module.exports = merge(common, {...} )
+    package.json:
+	"start": "webpack --config webpack.dev.js",
+        "build": "webpack --config webpack.prod.js"
+
+18. dev-server
+	npm i -D webpack-dev-server
+	package.json:
+		start (not build): replace "webpack" with "webpack-dev-server --open"
+	// dev-server does all in memory; no need for dist folder.
+
+19. static assets
+	move assets into source directory (webpack will later copy them into dist folder)
+	npm i -D html-loader
+	webpack.common.js:
+		another entry object to rules array:
+			{ test: /\.html$/, use ["html-loader"] }
+	npm i -D file-loader
+		another entry to rules array:
+			{ test:/\.(svg|png|jpg|gif)$/, use { loader: "file-loader", options: { name: "[name].[hash].[ext]", outputPath: "imgs" } } }
+
+
+20. cleaning old hashed files
+
+npm install clean-webpack-plugin
+webpack.prod.js:
+	require CleanWebpackPlugin = require("clean-webpack-plugin");
+	plugins: [new CleanWebpackPlugin()]
+
+21. multiple entrypoints & vendor.js
+
+new file inside src -> vendor.js
+make module.exports.entry into object inside webpack.common.js:
+	entry: {main: "./src/index.js", vendor: "./src/vendor.js" }
+webpack.prod.js: refactor filename: "main..." into filename: "[name].[contentHash].bundle.js"
+webpack.dev.js:	[name].bundle.js
+
+example (vendor.js):
+import "bootstrap";
+// npm install -D jquery popper.js
+
+
+22. extract css into own files (better for performance; flash of unstyled content otherwise)
+
+npm install -D mini-css-extract-plugin
+webpack.prod.js:
+	const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+	plugins: [new MiniCssExtractPlugin({filename: "[name].[contentHash].css"}), ...]
+
+// Next make sure we are using this instead of styleloader in common config
+Move the entire scss rule from common to dev
+Paste the same thing to production, but instead of "style-loader" -> MiniCssExtractPlugin.loader // Step 3. Extract css into files
+
+23. minify html/js/css
+
+npm i -D optimize-css-assets-webpack-plugin
+webpack.prod.js:
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+above plugin new property called optimization
+optimization: {
+	minimizer: [new OptimizeCssAssetsPlugin()]
+},
+
+as the above replaces default setting to minimize js, we need to explicitly re-state it:
+const TerserPlugin = require("terser-webpack-plugin");
+
+and 	minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()]
+
+can also minify html page if wanted (template):
+new HtmlWebpackPlugin(
+{ template: ... ,
+minify: { removeComments: true, removeAttributeQuotes: true, collapseWhitespace: true }
+});
+
+
+---------------------------
+
+
+EXTRA: Build time gzipping (https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a)
+
+1.Install the Webpack compression plugin 
+
+npm install compression-webpack-plugin --save-dev
+
+2. Import the plugin to webpack.config.prod.js
+
+var CompressionPlugin = require('compression-webpack-plugin');
+
+3. Add it to plugins array
+
+  plugins: [
+    new webpack.DefinePlugin({ 
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new CompressionPlugin({   <-- Add this
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
+  ]
+
+4. Finally, add this middleware to Express to return .js.gz so you can still load bundle.js from the html but will receive bundle.js.gz
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
+

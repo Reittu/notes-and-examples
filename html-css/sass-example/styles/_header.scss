@@ -1,0 +1,30 @@
+// Parenthesis (parameters) optional
+@mixin flexCenter($direction, $background) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: $direction;
+    background: $background;
+}
+
+header {
+    @include flexCenter(column, #97f1ff);
+    color: $textColor;
+    // Same as header button { }
+    button {
+        background: $primaryBtn;
+        // & = this
+        &:hover {
+            background: red;
+        }
+        &::after {
+            content: 'Helllooo';
+        }
+    }
+}
+/*
+header button {
+    background: $primaryBtn;
+}
+*/

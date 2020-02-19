@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Examples</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="form-style-1">
+        <h2>Contact Us</h2>
+        <form action="">
+            <div class="float-container">
+                <input id="name" type="text" name="" required>
+                <label for="name">Name</label>
+            </div>
+            <div class="float-container">
+                <input id="email" type="email" name="" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="float-container">
+                <input id="subject" type="text" name="" required>
+                <label for="subject">Subject</label>
+            </div>
+            <div class="float-container">
+                <textarea id="message" rows="5" required></textarea>
+                <label for="message">Message</label>
+            </div>
+            <input type="submit" name="" value="Submit">
+        </form>
+    </div>
+    <script>
+        // Older browser support (e.g. IE11)
+        if (window.NodeList && !NodeList.prototype.forEach) { NodeList.prototype.forEach = Array.prototype.forEach; }
+        document.querySelectorAll(".float-container input, .float-container textarea").forEach(
+            function (element) {
+                element.oninput = function () {
+                    if (element.value !== "")
+                        element.classList.add("filled");
+                    else element.classList.remove("filled");
+                    // Replace built-in validity check with your own if necessary.
+                    if (!element.checkValidity()) {
+                        element.classList.add("invalid");
+                        element.classList.remove("valid");
+                    } else {
+                        element.classList.add("valid")
+                        element.classList.remove("invalid")
+                    }
+                }
+            }
+        )
+    </script>
+</body>
+
+</html>

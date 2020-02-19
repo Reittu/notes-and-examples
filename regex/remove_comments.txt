@@ -1,0 +1,4 @@
+\/\*[\s\S\r]*?\*\/|\/\/.*?$
+
+// Row comments | Multiline comments | HTML comments
+(\/\/.*?$)|(\/\*[\s\S\r]*?\*\/)|(<!--[\s\S\r]*?-->)

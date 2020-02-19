@@ -1,0 +1,3 @@
+robocopy . c:\inetpub\CIVEBuildCentral\UI\. /IS /S /XD node_modules
+
+robocopy asd test/. /IS /S /XD node_modules

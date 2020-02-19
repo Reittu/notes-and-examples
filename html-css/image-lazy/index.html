@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 style="text-align: center; font-size: 96px;">Scroll down</h1>
+    <div class="filler-div"></div> 
+    <div class="aspect-wrapper">
+        <div class="lazy-wrapper not-loaded"><img data-src="1-1-600.jpg" alt="map"></div>
+    </div>
+    <div class="filler-div"></div>
+    <div class="aspect-wrapper">
+        <div class="aspect-3-2 lazy-wrapper not-loaded"><img data-src="3-2-1920.jpg" alt="nature"></div>
+    </div>
+    <div class="filler-div"></div>
+    <div class="aspect-wrapper">
+        <div class="aspect-4-3 lazy-wrapper not-loaded"><img data-src="4-3-1152.jpg" alt="woman"></div>
+    </div>
+    <div class="filler-div"></div>
+
+    <div class="flex-container">
+        <div class="flex-test lazy-wrapper not-loaded"><img data-src="1-1-600.jpg" alt="map"></div>
+        <div class="flex-test lazy-wrapper not-loaded"><img data-src="1-1-600.jpg" alt="map"></div>
+        <div class="flex-test lazy-wrapper not-loaded"><img data-src="1-1-600.jpg" alt="map"></div>
+    </div>
+    <div class="filler-div"></div>
+</body>
+
+</html>
+
+<script>
+    (function initializeLazyLoading() {
+    const images = document.querySelectorAll("[data-src]");
+    const imgOptions = {
+        threshold: 0,
+        rootMargin: "0px 0px 20px 0px"
+    };
+
+    const imgObserver = new IntersectionObserver((entries, imgObserver) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            preloadImage(entry.target);
+            imgObserver.unobserve(entry.target);
+        })
+    }, imgOptions);
+
+    images.forEach(img => {
+        imgObserver.observe(img);
+        img.addEventListener('load', () => transitionToImage(img));
+    });
+
+    
+    function preloadImage(img) {
+        const src = img.getAttribute("data-src");
+        if (src) img.src = src;
+    }
+
+    function transitionToImage(img) {
+        const parent = img.parentElement;
+        img.style.opacity = 1;
+        parent.className += " transitioning";
+        setTimeout(() => parent.className = parent.className.replace("not-loaded transitioning", "loaded"), 300);
+    }
+})();
+
+</script>
+
+<style>
+    * {
+        position: relative;
+    }
+    body {
+        margin:0;
+        background-color: #fefefe;
+    }
+    .filler-div {
+        height: 200vh;
+        width: 100vw;
+        background-color: #fff
+    }
+
+    [data-src] {
+        transition: opacity .3s ease-out;
+        opacity: 0;
+        display: block;
+        width: 100%;
+    }
+
+    .lazy-wrapper {
+        background-color: #e6e6e6;
+        height: 0;
+        width: 100%;
+        padding-bottom: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .lazy-wrapper.not-loaded::before {
+        content: '';
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        background-color: transparent;
+        animation: rotate 1.3s linear infinite;
+        transform: translate(-50%, -50%) rotateZ(0deg);
+        left: 50%;
+        top: 50%;
+        border: 75px double transparent;
+        border-radius: 50%;
+        border-top-color: #2f2f2f;
+        border-bottom-color: #2f2f2f;
+        outline: 1px solid transparent;
+        transition: opacity .3s;
+    }
+
+    .lazy-wrapper.transitioning::before {
+        opacity: 0;
+    }
+
+    .aspect-wrapper {
+        max-width: 750px;
+        margin: 0 auto;
+    }
+
+    .aspect-3-2 {
+        padding-bottom: 66.6% !important
+    }
+
+    .aspect-4-3 {
+        padding-bottom: 75% !important;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+    .flex-test {
+        flex: 1;
+        padding-bottom: 33.3%;
+        box-shadow: 0 0 3px 1px #5d5d5d
+    }
+
+    @keyframes rotate {
+        100% {
+            transform: translate(-50%, -50%) rotateZ(360deg)
+        }
+    }
+    @media (max-width: 480px) {
+        .flex-container {
+            flex-direction: column;
+        }
+        .flex-test {
+            padding-bottom: 100%;
+        }
+        .flex-test.transitioning, .flex-test.loaded {
+            padding-bottom: 0%;
+        }
+    }
+</style>

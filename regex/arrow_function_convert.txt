@@ -1,0 +1,33 @@
+Converts regular functions to arrow functions.
+
+Syntax:
+- Regex
+- Replace string
+
+// \s\S\r is a dotall without a flag (also matches new lines).
+// (?<!\() needed to skip named IIFE
+
+Named single statement:
+
+(?<!\()function (\w+)\s?\((.*?)\)\s?\{[\s\r]*?(?:return )?(\S[^{;]*?);?[\s\r]*\};?
+const $1 = ($2) => $3
+
+Named multiple statements:
+
+(?<!\()function (\w+)\s?\((.*?)\)\s?(?=\{)
+const $1 = ($2) => 
+
+Anonymous single statement:
+
+function\s?\((.*?)\)\s?\{[\r\s]*?(?:return )?(\S[^{;]*?);?[\s\r]*\};?
+($1) => $2
+
+Anonymous multiple statements:
+
+function\s?\((.*?)\)\s?(?=\{)
+($1) => 
+
+Unnecessary parenthesis:
+
+\((\w+)\) ?=>
+$1 =>

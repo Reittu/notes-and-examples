@@ -1,0 +1,11 @@
+Download svg
+
+Open on figma
+
+Get rid of all extra elements such as shadows that won't be needed for the animation
+
+Group all meaningful parts into one using CTRL+G (SHIFT+click for add to selection)
+
+Select parent layer -> Go to exports (lower right) -> change to svg -> ... -> include "id" Attribute
+
+Check style.css for rest

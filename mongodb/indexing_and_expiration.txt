@@ -1,0 +1,18 @@
+db.posts.createIndex({"student_key" : 1}) // ascending order for indexing
+db.posts.dropIndex({"student_key" : 1})
+
+-- mongoose:
+
+animalSchema.index({ name: 1, type: -1 }); // schema level; name gets ascending and type gets descending ordering
+
+-- expiration timer: 
+
+db.log_events.createIndex( { "createdAt": 1 }, { expireAfterSeconds: 3600 } )
+
+-- or with an explicit field containing the time:
+
+db.log_events.insert( {
+   "expireAt": new Date('July 22, 2013 14:00:00'),
+   "logEvent": 2,
+   "logMessage": "Success!"
+} )

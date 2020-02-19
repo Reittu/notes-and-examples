@@ -1,0 +1,18 @@
+touch:
+
+type nul >> your_file.txt
+
+----------------------------
+
+copy:
+
+// Files only
+// "Source files" --> "Destination folder"
+COPY "*.jpg" "./hey"
+
+// All content (including folders)
+xcopy /E /I asd test		asd is the SOURCE folder test is the DESTINATION folder.
+
+// Best for exclusion (most modern for windows)
+// Copies all but the excluded files (node_modules) from "asd" folder to "test" folder.
+robocopy asd test/. /IS /S /XD node_modules  		

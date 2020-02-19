@@ -1,0 +1,28 @@
+cmd -> ren *.txt ?????.txt
+ren *.txt *.js
+
+alternatively: home -> ctrl + a -> rename
+
+? = captured character from original
+
+---------------------------------------
+
+Powershell:
+
+Dir | %{Rename-Item $_ -NewName ("myitem_{0}.txt" -f $nr++)}
+
+// Reset number with $nr = 0 or reopen shell
+
+Dir | Rename-Item -NewName {$_.name -replace "my",""}
+
+Remove spaces:
+
+Dir | Rename-Item -NewName { $_.Name -replace " ","_" }
+
+Replace extension:
+
+Dir | Rename-Item -NewName { [io.path]::ChangeExtension($_.name, "doc") }
+
+Specific files only:
+
+Dir -filter *.jpg | %{Rename-Item $_ -NewName ("example_name_{0}.jpg" -f $nr++)}

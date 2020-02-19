@@ -1,0 +1,17 @@
+With compass, simply click menu export and save...
+
+With C:\Program Files\MongoDB\Server\4.2\bin\
+
+-> cmd -> mongodump --db acme
+
+or just run mongodump.exe to backup all databases.
+
+restore with mongorestore.exe:
+
+mongorestore --port <port_db_uses> C:\path\to\dumps
+
+
+for remote cloud (compass)
+https://docs.atlas.mongodb.com/command-line-tools
+
+mongodump, mongorestore

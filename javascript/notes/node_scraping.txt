@@ -1,0 +1,7 @@
+https://www.npmjs.com/package/jsdom
+
+or
+
+https://www.npmjs.com/package/htmlparser2
+
+Queue download html pages -> parse locally with jsdom

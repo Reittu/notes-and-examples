@@ -1,0 +1,15 @@
+Can either do...
+
+const Logo = () => {
+  return (
+    <svg>
+        <path x= xxxxxxxxxx>
+   </svg>
+  )
+}
+
+and import
+
+Or use
+
+https://github.com/gilbarbara/react-inlinesvg

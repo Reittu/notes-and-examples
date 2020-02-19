@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+	<!-- <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script> -->
+	
+    <script src="semantic.min.js"></script>
+	<script src="typed.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"></script>
+</head>
+<body>
+    <div class="ui message">
+        <div class="header">
+          Welcome back!
+        </div>
+        <p>This is a special notification which you can dismiss if you're bored with it.</p>
+        <p><a href="#">Test link with copied style</a></p>
+      </div>
+
+
+      <div class="ui placeholder">
+        <div class="image header">
+          <div class="line"></div>
+          <div class="line"></div>
+          </a>
+        </div>
+      </div>
+	  <!-- Copy pasted from figma  -->
+	 <svg class="outer" width="171" height="172" viewBox="0 0 171 172" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M85.416 171.316L0.288989 86.1272L85.416 0.93804L170.543 86.1272L85.416 171.316Z" fill="#2D374C"/>
+		<path class="inner" d="M115.727 116.459L55.107 116.459L55.107 55.7952L115.727 55.7952V116.459Z" fill="#36868E"/>
+	</svg>
+	
+	<svg class="outer" width="171" height="172" viewBox="0 0 171 172" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M85.416 171.316L0.288989 86.1272L85.416 0.93804L170.543 86.1272L85.416 171.316Z" fill="#2D374C"/>
+		<path class="inner" d="M115.727 116.459L55.107 116.459L55.107 55.7952L115.727 55.7952V116.459Z" fill="#36868E"/>
+	</svg>
+	
+	<svg class="outer" width="171" height="172" viewBox="0 0 171 172" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M85.416 171.316L0.288989 86.1272L85.416 0.93804L170.543 86.1272L85.416 171.316Z" fill="#2D374C"/>
+		<path class="inner" d="M115.727 116.459L55.107 116.459L55.107 55.7952L115.727 55.7952V116.459Z" fill="#36868E"/>
+	</svg>
+
+	<h1 style="margin-left: 200px" id="my-header">Hello, just some header passing by...</h1>
+	<h2 class="type-test" style="text-align: center; height: 1em; display: inline"></h2>
+
+<script>
+// Can have repeatDelay: <val>, paused: <val>, yoyo: <val>, ...
+const tl1 = new TimelineMax({ repeat: -1 })
+	.to(".outer", {duration: 3, rotation: 360, scale: 0.5, x: 300})
+	.to(".outer", {duration: 1, rotation: 0, scale: 1, x: 0});
+	
+const tl2 = new TimelineMax({ repeat: -1, paused: true })
+
+TweenMax.set(".inner", {
+  transformOrigin:"50% 50%"         // make transform origin be center for x and y axis
+});
+tl2.to(".inner", {duration: 1, rotation: 360})
+	.play();
+	
+const tl3 = new TimelineMax({ repeat: -1 })
+.to(".inner", {duration: 1, fill:"#FF0000"})
+.to(".inner", {duration: 1, fill:"#36868E"});
+
+const tl4 = new TimelineMax({ repeat: -1 })
+												// ease:Linear.easeNone	https://greensock.com/docs/v2/Easing
+.to("#my-header", {duration: 5, x: 600, y: -200, ease:Elastic.easeOut.config(1, 0.3) } )
+.to("#my-header", {duration: 5, x: 0, y: 0, ease:Elastic.easeOut.config(1, 0.3) } );
+	
+	
+// ELEMENT NEEDS TO BE INLINE FOR THE CURSOR TO WORK. Can wrap a span inside the header or paragraph though.
+var typed = new Typed('.type-test', {
+  // Can also be stringsElement: '#elem'
+  // cursorChar: '_'
+  strings: ["First ^1000 sentence", "Second ^1000 sentence.^1000", "Third sentence.", 'This is a JavaScript library', 'This is an ES6 module'],
+  typeSpeed: 60,
+  backSpeed: 30,
+  backDelay: 500,
+  startDelay: 500,
+  showCursor: true,
+  loop: true,
+  smartBackspace: true // Default value
+});
+	
+	
+	
+</script>
+
+</body>
+</html>

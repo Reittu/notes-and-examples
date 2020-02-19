@@ -1,0 +1,106 @@
+@import './variables';
+@import './header';
+@import './hover';
+@import './cards';
+
+*, *::before, *::after { box-sizing: border-box;}
+
+.contact {
+    // This would inherit all the styles (including child-element styling)
+    // @extend header;
+    // Can also do base classes that are not used directly; rather extended
+    //%equal-heights {
+    //    display: flex;
+    //    flex-wrap: wrap;
+    //}
+    // @extend %equal-heights;
+
+
+
+
+    // Vanilla css needed for units that are not the same.
+    // Supports + - / * %
+    //width: calc(100% - 100px);
+    @include flexCenter(row, #8effc6);
+}
+
+
+  a[data-tool-tip]::after {
+      content: attr(data-tool-tip);
+      display: block;
+      position: absolute;
+      background-color: #453e3e;
+      padding: 1em 3em;
+      color: white;
+      border-radius: 5px;
+      font-size: .8em;
+      bottom: 0;
+      left: -50%;
+      white-space: nowrap;
+      border: 1px solid black;
+      transform: scale(0);
+      transition: 
+        transform ease-out 150ms,
+        bottom ease-out 150ms;
+
+  }
+
+  a[data-tool-tip]:hover::after {
+      transform: scale(1);
+      bottom: 100%;
+  }
+
+  // Can use ^ $ and to indicate start or end
+  a[href^="http"]::after {
+      font-family: 'Font Awesome 5 Free';
+      content: ' Placeholder \f35d';
+      font-weight: 900;
+      font-size: .8em;
+  }
+
+  .counters {
+    // Resets every time this type of element is encountered. Needed if multiple separate sections.
+    counter-reset: counter-name;
+    margin-bottom: 5em;    
+}
+    
+    
+
+  .section {
+      position: relative;
+      margin: 3em auto;
+      max-width: 50%;
+  }
+
+  .section::before {
+    counter-increment: counter-name;
+    content: counter(counter-name);
+    position: absolute;
+    left: -2.5em;
+    top: -.5em;
+    background: white;
+    width: 1.5em;
+    height: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 3px solid #453e3e;
+    color: rebeccapurple;
+    box-sizing: border-box;
+    font-family: Baloo;
+    transition:
+        width ease-out 0.2s,
+        height ease-out 0.2s,
+        border ease-out 0.3s;
+  }
+
+  .section:hover::before {
+    width: 2.5em;
+    height: 2.5em;
+    border: 10px solid #05ca78;
+  }
+
+  .relative {
+      position: relative;
+  }

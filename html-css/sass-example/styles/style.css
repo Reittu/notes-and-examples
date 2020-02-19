@@ -1,0 +1,324 @@
+@import url("https://fonts.googleapis.com/css?family=Unica+One|Vollkorn");
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #97f1ff;
+  color: #2b2b2b;
+}
+
+header button {
+  background: #0dd1b0;
+}
+
+header button:hover {
+  background: red;
+}
+
+header button::after {
+  content: 'Helllooo';
+}
+
+/*
+header button {
+    background: $primaryBtn;
+}
+*/
+body {
+  text-align: center;
+}
+
+.intro {
+  position: relative;
+  display: inline-block;
+  color: red;
+  font-size: 3em;
+}
+
+.intro::before, .intro::after {
+  content: '';
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+}
+
+.intro::before {
+  background: red;
+  width: 100vw;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  z-index: -2;
+}
+
+.intro::after {
+  background: white;
+  z-index: -1;
+  height: 101%;
+  left: -.1em;
+  right: -.1em;
+}
+
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-size: 1rem;
+  text-align: center;
+  font-family: "Vollkorn";
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "Unica One";
+  text-transform: uppercase;
+  line-height: .9;
+  color: #c31;
+}
+
+h2 {
+  margin-top: 1.2em;
+  margin-bottom: 0;
+}
+
+p {
+  margin-top: .25em;
+}
+
+a {
+  color: #c31;
+}
+
+.intro {
+  font-size: 4rem;
+}
+
+blockquote {
+  font-size: 2rem;
+  color: black;
+}
+
+blockquote::before {
+  content: open-quote;
+}
+
+blockquote::after {
+  content: close-quote;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.card {
+  position: relative;
+  margin: 1em;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.card::before, .card::after {
+  content: '';
+  position: absolute;
+  top: 1.25em;
+  bottom: 1.25em;
+  left: 1.25em;
+  right: 1.25em;
+  opacity: 1;
+  -webkit-transition: -webkit-transform ease-out 250ms;
+  transition: -webkit-transform ease-out 250ms;
+  transition: transform ease-out 250ms;
+  transition: transform ease-out 250ms, -webkit-transform ease-out 250ms;
+}
+
+.card::before {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  -webkit-transform: scale(0, 1);
+          transform: scale(0, 1);
+}
+
+.card::after {
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  -webkit-transform: scale(1, 0);
+          transform: scale(1, 0);
+}
+
+.card:hover::before {
+  -webkit-transform: scale(1.05, 1);
+          transform: scale(1.05, 1);
+}
+
+.card:hover::after {
+  -webkit-transform: scale(1, 1.05);
+          transform: scale(1, 1.05);
+}
+
+.card__img {
+  max-width: 100%;
+  display: block;
+  -webkit-transition: opacity ease-out 250ms;
+  transition: opacity ease-out 250ms;
+}
+
+.card:hover .card__img {
+  opacity: .4;
+}
+
+.card__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: white;
+  opacity: 0;
+  -webkit-transition: opacity ease-out 250ms;
+  transition: opacity ease-out 250ms;
+}
+
+.card:hover .card__text {
+  opacity: 1;
+}
+
+.card__title {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 0;
+}
+
+.source {
+  opacity: .8;
+  position: absolute;
+  width: 100%;
+  bottom: 1em;
+}
+
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.contact {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: #8effc6;
+}
+
+a[data-tool-tip]::after {
+  content: attr(data-tool-tip);
+  display: block;
+  position: absolute;
+  background-color: #453e3e;
+  padding: 1em 3em;
+  color: white;
+  border-radius: 5px;
+  font-size: .8em;
+  bottom: 0;
+  left: -50%;
+  white-space: nowrap;
+  border: 1px solid black;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: bottom ease-out 150ms, -webkit-transform ease-out 150ms;
+  transition: bottom ease-out 150ms, -webkit-transform ease-out 150ms;
+  transition: transform ease-out 150ms, bottom ease-out 150ms;
+  transition: transform ease-out 150ms, bottom ease-out 150ms, -webkit-transform ease-out 150ms;
+}
+
+a[data-tool-tip]:hover::after {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  bottom: 100%;
+}
+
+a[href^="http"]::after {
+  font-family: 'Font Awesome 5 Free';
+  content: ' Placeholder \f35d';
+  font-weight: 900;
+  font-size: .8em;
+}
+
+.counters {
+  counter-reset: counter-name;
+  margin-bottom: 5em;
+}
+
+.section {
+  position: relative;
+  margin: 3em auto;
+  max-width: 50%;
+}
+
+.section::before {
+  counter-increment: counter-name;
+  content: counter(counter-name);
+  position: absolute;
+  left: -2.5em;
+  top: -.5em;
+  background: white;
+  width: 1.5em;
+  height: 1.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 50%;
+  border: 3px solid #453e3e;
+  color: rebeccapurple;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Baloo;
+  -webkit-transition: width ease-out 0.2s, height ease-out 0.2s, border ease-out 0.3s;
+  transition: width ease-out 0.2s, height ease-out 0.2s, border ease-out 0.3s;
+}
+
+.section:hover::before {
+  width: 2.5em;
+  height: 2.5em;
+  border: 10px solid #05ca78;
+}
+
+.relative {
+  position: relative;
+}
+/*# sourceMappingURL=style.css.map */

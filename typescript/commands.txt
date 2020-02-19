@@ -1,0 +1,6 @@
+tsc main.ts
+tsc main --target es6
+tsc main --watch
+tsc main --watch --target es6
+
+// Or just use the Visual Studio Code plugin for SCSS.

@@ -1,0 +1,3 @@
+SORT /R regex_parsed_simplified.txt /o reversed.txt
+
+<- Reverse order

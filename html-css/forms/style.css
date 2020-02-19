@@ -1,0 +1,70 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box
+}
+textarea {
+  resize: vertical
+}
+.form-style-1 {
+  width: 400px;
+  padding: 40px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  border: 1px solid rgba(0,0,0,.1)
+}
+.form-style-1 h2 {
+  margin: 0 0 40px;
+  padding: 0;
+  text-transform: uppercase
+}
+.form-style-1 input,
+.form-style-1 textarea {
+  width: 100%;
+  padding: 1em 0;
+  margin-bottom: 30px;
+  font-size: 1em;
+  box-shadow: none;
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid #999
+}
+.form-style-1 input[type=submit] {
+  border-bottom: none;
+  cursor: pointer;
+  background: #f7497d;
+  color: #fff;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  opacity: .8;
+}
+.form-style-1 input[type=submit]:hover {
+  opacity: 1;
+}
+.form-style-1 .float-container {
+  position: relative
+}
+.form-style-1 form label {
+  position: absolute;
+  top: 1em;
+  left: 0;
+  transition: transform .3s ease-out;
+  font-size: .8em;
+  color: #666
+}
+.form-style-1 input:focus,
+.form-style-1 textarea:focus {
+  border-color: #f7497d
+}
+.form-style-1 .filled ~ label,
+.form-style-1 input:focus ~ label,
+.form-style-1 textarea:focus ~ label {
+  transform: translateY(-1.2em)
+}
+.form-style-1 .valid ~ label {
+  color: #2ebc99
+}
+.form-style-1 .invalid ~ label {
+  color: #f7497d
+}

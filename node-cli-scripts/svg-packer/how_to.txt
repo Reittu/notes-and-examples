@@ -1,0 +1,5 @@
+npm i grunt grunt-svgstore
+
+grunt svgstore
+
+// Svgs should be put into svgs directory; output file will go into output folder as stated in the Gruntfile.js.

@@ -1,0 +1,115 @@
+Databases -> Collections -> Documents
+ctrl + l = clear
+
+C:\Program Files\MongoDB\Server\4.2\bin\mongo.exe
+
+show dbs
+use acme
+
+db.createCollection('posts')
+show collections
+
+db.posts.insert({
+    title: 'Post One',
+    body: 'Body of post one',
+    category: 'News',
+    likes: 4,
+    tags: ['news', 'events'],
+    user: {
+        name: 'Tony Reittu',
+        status: 'author'
+    },
+    date: Date()
+})
+
+db.posts.insertMany( [{a: 1}, {b: 55}] )
+
+----
+
+db.posts.find()
+db.posts.find().pretty()
+db.posts.find( {category: 'News'} )
+db.posts.find().sort(1) // Ascending
+db.posts.find().sort(-1) // Descending
+db.posts.find( {category: 'News'} ).count()
+db.posts.find().limit(2)
+db.posts.find().forEach(doc => { print('Blog Post: ' + doc.title) })
+db.posts.findOne({category: 'News'})
+
+// Deletes all properties that are not set explicitly in new from original one
+// upsert means that if doesn't exist insert as new entry
+db.posts.update( {title: 'Post Two'}, 
+    {
+        title: 'Post Two',
+        body: 'New post 2 body',
+        date: Date()
+    },
+    {
+        upsert: true
+    }
+)
+
+// Only update
+db.posts.update( {title: 'Post Two'}, 
+    {
+        $set: {
+          category: 'Technology',
+	  body: 'Body of post 2'
+        }
+    }
+)
+
+// Increment (creates a new entry if it doesn't exist)
+db.posts.update( {title: 'Post Two'}, 
+    {
+        $inc: {likes: 2}
+    }
+)
+
+// Rename
+db.posts.update( {title: 'Post Two'}, 
+    {
+        $rename: {likes: 'views'}
+    }
+)
+
+// Delete. Normally all should be done with object id if possible (removing, updating, ...)
+db.posts.remove({title: 'Post Four'})
+
+// Matching
+db.posts.find({
+    comments: {
+        $elemMatch: {
+             user: 'Mary Williams'
+        }
+    }
+})
+
+// Indexing (performance for queries)
+db.posts.createIndex({title: 'text'})
+
+// Search by the property marked by the index creation stage(?) -- case insensitive
+db.posts.find({
+    $text: {
+        $search: "\"post\""
+    }
+})
+// Returns all elements with 'post' in their title (text now bound to title)
+
+// Greater than ($gt), less than ($lt), $gte, $lte
+...find( {views: { $gt: 3 } } )
+
+// Lookup, aggregating, left join (fetches objects with postTitle same as title from another collection and pushes them as new object property/field "comments".
+db.posts.aggregate([
+    { $lookup:
+        {
+           from: "comments",
+           localField: "title",
+           foreignField: "postTitle",
+           as: "comments"
+        }
+    }
+])
+
+
+

@@ -1,0 +1,8 @@
+// Just use capturing groups if the whole match doesn't need to be trashed
+
+const input = "Identifying part, part I want";
+const regex = /(Identifying part, )(.*)/;
+input.match(regex)[2];
+
+// Or lookbehind
+// input.match(/(?<=Identifying part, )(.*)/);

@@ -1,0 +1,14 @@
+return Customer.createCollection().
+  then(() => Customer.startSession()).
+  // The `withTransaction()` function's first parameter is a function
+  // that returns a promise.
+  then(session => session.withTransaction(() => {
+    return Customer.create([{ name: 'Test' }], { session: session });
+  })).
+  then(() => Customer.countDocuments()).
+  then(count => assert.strictEqual(count, 1));
+
+
+https://mongoosejs.com/docs/transactions.html
+https://docs.mongodb.com/manual/core/transactions/
+https://docs.mongodb.com/manual/core/write-operations-atomicity/

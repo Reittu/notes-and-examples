@@ -1,0 +1,10 @@
+//m
+
+m = multiline mode
+s = dotall (dot also matches newlines)
+
+/\*$/m.test(`foo
+bar*
+fiz`)
+
+// Will be matched with multiline flag.

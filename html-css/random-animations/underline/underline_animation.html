@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Playground</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Gradient background clip...</h2>
+    <p>Hello world...</p>
+    <span>Hello world</span>
+</body>
+
+</html>
+
+<style>
+    p {
+        width: 200px;
+        text-align: center;
+        position: relative;
+        margin: 10px auto;
+    }
+
+    p::before,
+    p::after {
+        content: "";
+        position: absolute;
+        background-color: red;
+        bottom: -5px;
+        width: 0px;
+        height: 5px;
+        /* animation: stuff 0.5s alternate infinite;
+        animation-play-state: paused; */
+        transition: width 0.3s ease-in-out, opacity 0.3s;
+        opacity: 0;
+    }
+
+    p::before {
+        left: 50%;
+    }
+
+    p::after {
+        right: 50%;
+    }
+
+    p:hover::before,
+    p:hover::after {
+        width: 50%;
+        opacity: 1;
+    }
+
+
+
+    span::before {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: calc(50% - 10px);
+        background-color: black;
+        height: 3px;
+        width: 20px;
+        /* animation: stuff 0.5s alternate infinite;
+        animation-play-state: paused; */
+        transition: transform 0.3s ease-in-out, opacity 0.3s;
+        opacity: 0;
+
+    }
+
+    span:hover::before {
+        /* animation-play-state: running; */
+        transform: scaleX(10);
+        opacity: 1;
+    }
+
+    @keyframes stuff {
+        0% {
+            width: 20px;
+        }
+
+        100% {
+            width: 100%;
+        }
+    }
+</style>

@@ -1,0 +1,43 @@
+a:hover {
+    background-color: rgba(40, 150, 218, 0.2);
+    color: #00689E;
+    text-decoration: initial;
+}
+
+a {
+    position: relative;
+    text-decoration: none;
+    border-radius: 5px;
+    line-height: 1;
+    color: inherit;
+    margin: 0px -2px;
+    padding: 1px 4px;
+    background-color: rgba(150, 150, 150, 0.1);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+body {
+	text-align: center;
+}
+
+.typed-cursor {
+	opacity: 1;
+	animation: blink .7s infinite;
+}
+	
+.type-test + .typed-cursor {
+	font-size: 1.7em;
+}
+
+@keyframes blink {
+     0% {
+         opacity: 1;
+     }
+     50% {
+         opacity: 0;
+     }
+     100% {
+         opacity: 1;
+     }
+}

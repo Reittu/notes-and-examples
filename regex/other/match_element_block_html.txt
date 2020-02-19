@@ -1,0 +1,33 @@
+// Matches the outermost block that is indented appropriately.
+
+// Editor
+
+^(\s*)<(\w+).*?^\1</\2>
+
+// JavaScript
+
+/^(\s*)<(\w+).*?^\1<\/\2>/sm
+
+// Example input
+
+<div id="non-content-div">
+    <h1>PCRE does recursion!</h1>
+    <div id='content'>
+        <h2>First level matched</h2>
+        <!-- this comment </div> is tricky -->
+        <div id="one-deep">
+            <h3>Second level matched</h3>
+            <div id=two-deep>
+                <h4>Third level matched</h4>
+                <div id=three-deep>
+                    <h4>Fourth level matched</h4>
+                </div>
+                <p>stuff</p>
+            </div>
+            <!-- this comment <div> is tricky -->
+            <p>stuff</p>
+        </div>
+        <p>stuff</p>
+    </div>
+    <p>stuff</p>
+</div>
